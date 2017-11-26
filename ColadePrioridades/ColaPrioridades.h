@@ -1,0 +1,4 @@
+#ifndef COLAPRIORIDADES_H
+#define COLAPRIORIDADES_H
+
+#endif /* COLAPRIORIDADES_H */

@@ -1,0 +1,4 @@
+#ifndef LISTAADYACENCIA_H
+#define LISTAADYACENCIA_H
+
+#endif /* LISTAADYACENCIA_H */
