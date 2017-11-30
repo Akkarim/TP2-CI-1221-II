@@ -36,7 +36,6 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/ColadePrioridades/ColaPrioridades.o \
-	${OBJECTDIR}/ConjuntodeConjuntos/CnjCnjs.o \
 	${OBJECTDIR}/Diccionario/Diccionario.o \
 	${OBJECTDIR}/Grafo/ListaAdyacencia.o \
 	${OBJECTDIR}/Grafo/MatrizAdyacencia.o \
@@ -71,11 +70,6 @@ ${OBJECTDIR}/ColadePrioridades/ColaPrioridades.o: ColadePrioridades/ColaPriorida
 	${MKDIR} -p ${OBJECTDIR}/ColadePrioridades
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ColadePrioridades/ColaPrioridades.o ColadePrioridades/ColaPrioridades.cpp
-
-${OBJECTDIR}/ConjuntodeConjuntos/CnjCnjs.o: ConjuntodeConjuntos/CnjCnjs.cpp
-	${MKDIR} -p ${OBJECTDIR}/ConjuntodeConjuntos
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ConjuntodeConjuntos/CnjCnjs.o ConjuntodeConjuntos/CnjCnjs.cpp
 
 ${OBJECTDIR}/Diccionario/Diccionario.o: Diccionario/Diccionario.cpp
 	${MKDIR} -p ${OBJECTDIR}/Diccionario

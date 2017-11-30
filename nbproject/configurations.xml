@@ -17,7 +17,6 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>ConjuntodeConjuntos/CnjCnjs.cpp</itemPath>
       <itemPath>ColadePrioridades/ColaPrioridades.cpp</itemPath>
       <itemPath>Diccionario/Diccionario.cpp</itemPath>
       <itemPath>Grafo/ListaAdyacencia.cpp</itemPath>
@@ -58,8 +57,6 @@
             ex="false"
             tool="3"
             flavor2="0">
-      </item>
-      <item path="ConjuntodeConjuntos/CnjCnjs.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ConjuntodeConjuntos/CnjCnjs.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -108,8 +105,6 @@
             ex="false"
             tool="3"
             flavor2="0">
-      </item>
-      <item path="ConjuntodeConjuntos/CnjCnjs.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ConjuntodeConjuntos/CnjCnjs.h" ex="false" tool="3" flavor2="0">
       </item>
