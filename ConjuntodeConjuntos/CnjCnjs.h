@@ -1,6 +1,9 @@
 #ifndef CNJCNJS_H
 #define CNJCNJS_H
 
+#include <string>
+using namespace std;
+
 template < typename V>
 class CnjCnjs{
 public: 
@@ -24,7 +27,23 @@ public:
     //REQ: El Conjunto inicializado.
     //MOD:
     bool vacio();
-     
+    
+    //EFE: Retorna el identificador del conjunto donde se encuentra el elemento.
+    //REQ: El Conjunto inicializado y no vacio.
+    //MOD:
+    string cnjAlQuePertenece(V elemento);
+    
+    //EFE: Retorna true si el conjunto esta vacío, false si tiene al menos un elemento.
+    //REQ: El Conjunto inicializado.
+    //MOD:
+    void agregarConjunto(V elemento, string id);
+    
+    void unirConjuntos(string cnjUno, string cnjDos);
+private:
+    
+    V* primerElemento;
+    CnjCnjs* sigConjunto;
+    string identificador;
 };
 
 template < typename V >
