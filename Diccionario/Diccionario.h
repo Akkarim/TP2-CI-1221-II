@@ -183,4 +183,4 @@ string Diccionario<T>::Listar(){
     return fs.str();
 }
 
-#endif /* DICCIONARIO_H */
+#endif /* DICCIONARIOARIO_H */

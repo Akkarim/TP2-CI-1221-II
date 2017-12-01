@@ -1,11 +1,3 @@
-
-/* 
- * File:   ColaDePrioridad.h
- * Author: Isaac
- *
- * Created on November 22, 2017, 7:35 PM
- */
-
 #ifndef COLAPRIORIDADES_H
 #define COLAPRIORIDADES_H
 #define SIZE 20
@@ -154,5 +146,4 @@ template <typename A>
 int ColaPrioridades<A>::numElem() {
     return contador;
 }
-
 #endif /* COLAPRIORIDADES_H */
