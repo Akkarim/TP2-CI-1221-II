@@ -35,7 +35,6 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/ColadePrioridades/ColaPrioridades.o \
 	${OBJECTDIR}/Diccionario/Diccionario.o \
 	${OBJECTDIR}/Grafo/ListaAdyacencia.o \
 	${OBJECTDIR}/Grafo/MatrizAdyacencia.o \
@@ -65,11 +64,6 @@ LDLIBSOPTIONS=
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/tp2-ci-1221-ii.exe: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/tp2-ci-1221-ii ${OBJECTFILES} ${LDLIBSOPTIONS}
-
-${OBJECTDIR}/ColadePrioridades/ColaPrioridades.o: ColadePrioridades/ColaPrioridades.cpp
-	${MKDIR} -p ${OBJECTDIR}/ColadePrioridades
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ColadePrioridades/ColaPrioridades.o ColadePrioridades/ColaPrioridades.cpp
 
 ${OBJECTDIR}/Diccionario/Diccionario.o: Diccionario/Diccionario.cpp
 	${MKDIR} -p ${OBJECTDIR}/Diccionario
