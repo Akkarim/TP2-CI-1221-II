@@ -1,138 +1,177 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/* 
+ * File:   CnjCnjs.h
+ * Author: Isaac
+ *
+ * Created on 5 de noviembre de 2017, 11:30 p.m.
+ */
+
 #ifndef CNJCNJS_H
 #define CNJCNJS_H
-
+#include <string.h>
 #include <string>
+#include <sstream>
+#include <iostream>
 using namespace std;
 
-template < typename V>
-class CnjCnjs{
-public: 
+template <class T>
+class CnjCnjs {
+public:
     
+    //EFE:Constructuye el conjunto de conjunto disjutnos
+    //REQ:---
+    //MOD:
     CnjCnjs();
-    
-    CnjCnjs(V elemento, string id);
-    
-    CnjCnjs(const CnjCnjs<V>& orig);
-    
+    //EFE: Destruye el conjunto de conjuntos.
+    //REQ: conjunto de conjuntos inicialiado
+    //MOD: conjunto de conjuntos
     virtual ~CnjCnjs();
-    
-    //EFE: Inicializa el Conjunto de conjuntos.
-    //REQ:
+    //EFE:vacia el conjunto de conjuntos 
+    //REQ: conjunto de conjuntos inicializado
     //MOD:
-    void crear();
-    
-    //EFE: Destruye el Conjunto de conjuntos, lo deja inutilizable.
-    //REQ:
-    //MOD:
-    void destruir();
-    
-    //EFE: Vacía el conjunto de conjuntos y se puede volver  usar.
-    //REQ: El Conjunto de conjuntos inicializado.
-    //MOD: El Conjunto de conjuntos.
     void vaciar();
-    
-    //EFE: Retorna true si el conjunto esta vacío, false si tiene al menos un elemento.
-    //REQ: El Conjunto inicializado.
+    //EFE: retorna un true si el conjunto de conjuntos esta vacio y un false si no.
+    //REQ: conjunto de conjuntos inicializado
     //MOD:
     bool vacio();
-    
-    //EFE: Retorna el identificador del conjunto donde se encuentra el elemento.
-    //REQ: El Conjunto inicializado y no vacio, y no elementos repetidos.
-    //MOD:
-    string cnjAlQuePertenece(V elemento);
-    
-    //EFE: Retorna true si el conjunto esta vacío, false si tiene al menos un elemento.
-    //REQ: El Conjunto inicializado y no elementos repetidos.
-    //MOD:
-    void agregarConjunto(V elemento, string id);
-    
-    //EFE: Une dos conjuntos.
-    //REQ: Ambos conjuntos inicializados y no vacios.
-    //MOD: El primer conjunto.
-    void unirConjuntos(string cnjUno, string cnjDos);
-    
+    //EFE: retorna el identificador del conjunto que pertenece elemento
+    //REQ: conjunto de conjuntos inicializado.
+    //MOD:---
+    string conjuntoAlQuePertenece(T elemento);
+    //EFE: agrega un conjunto con un elemento al conjunto de conjuntos.
+    //REQ: conjunto de conjuntos inicializado. elemento no pertenezca a otro conjunto.
+    //MOD: conjunto de conjuntos..
+    void agregarConjunto(string Identificador, T elemento);
+    //EFE: une los elementos del conjunto 1 con los del conjunto 2.
+    //REQ: conjunto de conjuntos inicializado. ambos conjuntos existan.
+    //MOD: conjunto de conjuntos.
+    void unirConjuntos(string idConj1, string idConj2);
 private:
     
-    V* primerElemento = 0;
-    V* sigElemento = 0;
-    CnjCnjs* sigConjunto = 0;
-    string identificador;
-    static V* elementoNulo;
+    template <typename C>
+    struct Conjunto {
+        C elemento;
+        Conjunto *sigElem;
+
+        Conjunto(C e) {
+            elemento = e;
+            sigElem = nullptr;
+        };
+
+        Conjunto() {
+        };
+    };
+
+    template <typename C>
+    struct ConjuntosList {
+        string identificador;
+        ConjuntosList* sig;
+        Conjunto<C>* ConjPtr;
+
+        ConjuntosList(string id, C e) {
+            identificador = id;
+            ConjPtr = new Conjunto<C>(e);
+            sig = nullptr;
+        }
+
+        ConjuntosList() {
+            identificador = "";
+            ConjPtr = new Conjunto<C>;
+            sig = nullptr;
+        };
+    };
+    ConjuntosList<T>* primero;
 };
 
-V* CnjCnjs<V>::elementoNulo = 0;
-
-template < typename V >
-CnjCnjs<V>::CnjCnjs(){
+template <typename T>
+CnjCnjs<T>::CnjCnjs() {
+    primero = new ConjuntosList<T>;
 }
 
-template < typename V >
-CnjCnjs<V>::CnjCnjs(V* elemento, string id){
-    identificador = id;
-    primerElemento = elemento;
+template <typename T>
+CnjCnjs<T>::~CnjCnjs() {
+
 }
 
-template < typename V >
-CnjCnjs<V>::CnjCnjs(const CnjCnjs<V>& orig){   
+template <typename T>
+void CnjCnjs<T>::vaciar() {
+
 }
 
-template < typename V >
-CnjCnjs<V>::~CnjCnjs(){
-    
+template <typename T>
+bool CnjCnjs<T>::vacio() {
+    return primero==nullptr;
 }
 
-template < typename V >
-void CnjCnjs<V>::crear(){
-    primerElemento = elementoNulo;
-    identificador = "Contenedor";
+template <typename T>
+void CnjCnjs<T>::agregarConjunto(string Identificador, T elemento) {
+    ConjuntosList<T>* nConj = new ConjuntosList<T>(Identificador, elemento);
+    nConj->sig = primero;
+    primero = nConj;
 }
 
-template < typename V >
-void CnjCnjs<V>::destruir(){
-    
-}
-
-template < typename V >
-void CnjCnjs<V>::vaciar(){
-    
-}
-
-template < typename V >
-bool CnjCnjs<V>::vacio(){
-    bool empty = false;
-    if (primerElemento == elementoNulo)
-        empty = true;
-    return empty;
-}
-
-template < typename V >
-string CnjCnjs<V>::cnjAlQuePertenece(V* elemento){
-    string id = "";
+template <typename T>
+string CnjCnjs<T>::conjuntoAlQuePertenece(T elem) {
     bool encontrado = false;
-    if(primerElemento == elemento)
-        id = identificador;
-    else {
-        V* iterElem = sigElemento;
-        while(sigConjunto != 0 && !encontrado){
-            while(sigElemento != 0 && !encontrado){
-                if(iterElem)
-            }
+    Conjunto<T>* auxElem = primero->ConjPtr;
+    ConjuntosList<T>*  auxConj = primero;
+    string buscado = "";
+    while ((auxConj != nullptr)&&(!encontrado)) {
+        auxElem= auxConj->ConjPtr;
+        while ((auxElem != nullptr)&&(!encontrado)) {
+            if (auxElem->elemento == elem) {
+                encontrado = true;
+                buscado= auxConj->identificador;
+            } else
+                auxElem = auxElem->sigElem;
         }
+        auxConj= auxConj->sig;
     }
-    return id;
+        return buscado;  
 }
 
-template < typename V >
-void CnjCnjs<V>::agregarConjunto(V elemento, string id){
-    CnjCnjs<V>* newConj = new CnjCnjs(elemento, id);
-    if(primerElemento == elementoNulo)
-        primerElemento = newConj;
-    else
-        sigElemento = newConj;
+template <typename T>
+void CnjCnjs<T>::unirConjuntos(string idConj1, string idConj2){
+        bool encontrados=false;
+        Conjunto<T>*  Conj1=nullptr;
+        Conjunto<T>*  Conj2=nullptr;
+        Conjunto<T>*  conjAux;
+        ConjuntosList<T>*  Conjuntos=primero;
+        ConjuntosList<T>*  ConjuntosPrev=nullptr;
+        ConjuntosList<T>*  Conjunto2=primero;
+        if (primero->identificador==idConj2){
+            Conj2=primero->ConjPtr;
+        }
+        while ((Conjuntos!=nullptr)&&(!encontrados)){
+            if (Conjuntos->identificador==idConj1){
+                Conj1=Conjuntos->ConjPtr;
+            }
+            if (Conjuntos->sig->identificador==idConj2){
+                Conj2=Conjuntos->sig->ConjPtr;
+                ConjuntosPrev=Conjuntos;
+            }
+            if ((Conj1!=nullptr)&&(Conj2!=nullptr)){
+                encontrados=true;
+            }else if (!encontrados)
+                Conjuntos=Conjuntos->sig;
+        }    
+        while ( Conj1->sigElem!=nullptr){
+            Conj1= Conj1->sigElem;
+        }        
+        Conj1->sigElem=Conj2;
+        
+        if  (ConjuntosPrev!=nullptr){
+            Conjunto2=ConjuntosPrev->sig;
+            ConjuntosPrev->sig=Conjunto2->sig;
+        } else {
+            primero= primero->sig;
+        }
+        delete (Conjunto2);
 }
 
-template < typename V >
-void CnjCnjs<V>::unirConjuntos(string cnjUno, string cnjDos){
-    
-}
 #endif /* CNJCNJS_H */
