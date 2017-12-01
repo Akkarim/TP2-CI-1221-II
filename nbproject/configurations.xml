@@ -17,8 +17,6 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>ConjuntodeConjuntos/CnjCnjs.cpp</itemPath>
-      <itemPath>ColadePrioridades/ColaPrioridades.cpp</itemPath>
       <itemPath>Diccionario/Diccionario.cpp</itemPath>
       <itemPath>Grafo/ListaAdyacencia.cpp</itemPath>
       <itemPath>Grafo/MatrizAdyacencia.cpp</itemPath>
@@ -49,17 +47,10 @@
           <standard>8</standard>
         </ccTool>
       </compileType>
-      <item path="ColadePrioridades/ColaPrioridades.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
       <item path="ColadePrioridades/ColaPrioridades.h"
             ex="false"
             tool="3"
             flavor2="0">
-      </item>
-      <item path="ConjuntodeConjuntos/CnjCnjs.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ConjuntodeConjuntos/CnjCnjs.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -99,17 +90,10 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="ColadePrioridades/ColaPrioridades.cpp"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
       <item path="ColadePrioridades/ColaPrioridades.h"
             ex="false"
             tool="3"
             flavor2="0">
-      </item>
-      <item path="ConjuntodeConjuntos/CnjCnjs.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ConjuntodeConjuntos/CnjCnjs.h" ex="false" tool="3" flavor2="0">
       </item>
