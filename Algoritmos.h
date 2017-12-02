@@ -59,7 +59,7 @@ public:
     
     
 private:
-    vertice* VendedorRec(const grafos& g, vertice vrt, int peso, int solAc, vertice* v);
+    vertice* VendedorRec(const grafos& g, vertice vrt, int peso, vertice* v);
     int solOptima;
     vertice* mejorRuta;
     int numSolFacts;

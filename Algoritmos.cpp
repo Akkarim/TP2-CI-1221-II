@@ -286,11 +286,10 @@ void AlgoritmosGrafos::Vendedor(const grafos& g) {
     int n = g->NumVertices();
     vertice* ruta = new vertice[n];
     dvv.Crear();
-    int solAct = 9999;
     numSolFacts = 0;
-    solOptima = 0;
+    solOptima = 9999;
     dvv.Agregar(g->PrimerVertice());
-    vertice* rutaAct = VendedorRec(g, g->PrimerVertice(), 0, solAct, ruta);
+    vertice* rutaAct = VendedorRec(g, g->PrimerVertice(), 0,ruta);
     delete[] ruta;
     if(rutaAct != 0){
         cout << g->Etiqueta(g->PrimerVertice()) << "->";
@@ -298,15 +297,14 @@ void AlgoritmosGrafos::Vendedor(const grafos& g) {
             cout << g->Etiqueta(rutaAct[i]) << "->";
         }
         cout << g->Etiqueta(g->PrimerVertice()) << endl;
-        cout << endl;
-        cout << "Peso: " << solOptima << endl;
+        cout << "Peso Total: " << solOptima << endl;
         cout << "Numero de soluciones factibles: " << numSolFacts << endl;
     } else{
         cout << "No hay soluciones" << endl;
     }
 }
 
-vertice* AlgoritmosGrafos::VendedorRec(const grafos& g, vertice vrt, int peso, int solActu, vertice* ruta) {
+vertice* AlgoritmosGrafos::VendedorRec(const grafos& g, vertice vrt, int peso, vertice* ruta) {
     vertice* solucion = 0;
     if(dvv.NumElem() == g->NumVertices()){
         if(!g->Adyacentes(vrt, g->PrimerVertice())){
@@ -314,7 +312,7 @@ vertice* AlgoritmosGrafos::VendedorRec(const grafos& g, vertice vrt, int peso, i
         }
         peso += g->Peso(vrt, g->PrimerVertice());
         numSolFacts++;
-        if(peso < solActu){
+        if(peso < solOptima){
             const int n = g->NumVertices();   
             solucion = new vertice[n];
             solOptima = peso;
@@ -331,7 +329,7 @@ vertice* AlgoritmosGrafos::VendedorRec(const grafos& g, vertice vrt, int peso, i
             dvv.Agregar(ady);
             peso += g->Peso(vrt, ady);
             ruta[dvv.NumElem()-2] = ady;
-            vertice* solP = VendedorRec(g, ady, peso, solActu, ruta);
+            vertice* solP = VendedorRec(g, ady, peso, ruta);
             if(solP != 0){
                 if(solucion != 0){
                     delete[] solucion;
