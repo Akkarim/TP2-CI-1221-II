@@ -284,28 +284,29 @@ void AlgoritmosGrafos::Copiar(grafos o, grafos c) {
 
 void AlgoritmosGrafos::Vendedor(const grafos& g) {
     int n = g->NumVertices();
-    //mejorRuta = new vertice[n];
     vertice* ruta = new vertice[n];
     dvv.Crear();
     int solAct = 9999;
     numSolFacts = 0;
+    solOptima = 0;
     dvv.Agregar(g->PrimerVertice());
     vertice* rutaAct = VendedorRec(g, g->PrimerVertice(), 0, solAct, ruta);
     delete[] ruta;
     if(rutaAct != 0){
-        cout << g->Etiqueta(g->PrimerVertice()) << ",";
-        for(int i=0; i < n; i++){
-            cout << g->Etiqueta(rutaAct[i]) << ",";
+        cout << g->Etiqueta(g->PrimerVertice()) << "->";
+        for(int i=0; i < n-1; i++){
+            cout << g->Etiqueta(rutaAct[i]) << "->";
         }
+        cout << g->Etiqueta(g->PrimerVertice()) << endl;
         cout << endl;
-        cout << "Peso: " << solAct << endl;
+        cout << "Peso: " << solOptima << endl;
         cout << "Numero de soluciones factibles: " << numSolFacts << endl;
     } else{
         cout << "No hay soluciones" << endl;
     }
 }
 
-vertice* AlgoritmosGrafos::VendedorRec(const grafos& g, vertice vrt, int peso, int solAct, vertice* ruta) {
+vertice* AlgoritmosGrafos::VendedorRec(const grafos& g, vertice vrt, int peso, int solActu, vertice* ruta) {
     vertice* solucion = 0;
     if(dvv.NumElem() == g->NumVertices()){
         if(!g->Adyacentes(vrt, g->PrimerVertice())){
@@ -313,10 +314,10 @@ vertice* AlgoritmosGrafos::VendedorRec(const grafos& g, vertice vrt, int peso, i
         }
         peso += g->Peso(vrt, g->PrimerVertice());
         numSolFacts++;
-        if(peso < solAct){
+        if(peso < solActu){
             const int n = g->NumVertices();   
             solucion = new vertice[n];
-            solAct = peso;
+            solOptima = peso;
             for(int i =0; i < n-1; i++){
                 solucion[i] = ruta[i];
             }
@@ -330,7 +331,7 @@ vertice* AlgoritmosGrafos::VendedorRec(const grafos& g, vertice vrt, int peso, i
             dvv.Agregar(ady);
             peso += g->Peso(vrt, ady);
             ruta[dvv.NumElem()-2] = ady;
-            vertice* solP = VendedorRec(g, ady, peso, solAct, ruta);
+            vertice* solP = VendedorRec(g, ady, peso, solActu, ruta);
             if(solP != 0){
                 if(solucion != 0){
                     delete[] solucion;
@@ -339,7 +340,6 @@ vertice* AlgoritmosGrafos::VendedorRec(const grafos& g, vertice vrt, int peso, i
             }
             dvv.Eliminar(ady);
             peso -= g->Peso(vrt, ady);
-            numSolFacts--;
         }
         ady = g->SiguienteVerticeAdyacente(vrt, ady);
     } 
