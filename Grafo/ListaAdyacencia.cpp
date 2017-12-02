@@ -1,29 +1,29 @@
 #include "ListaAdyacencia.h"
 
-Grafo_ListaAdyacencia::Grafo_ListaAdyacencia()
+ListaAdyacencia::ListaAdyacencia()
 {
     //ctor
     cabeza = new Vertice();
     numVertices = 0;
 }
 
-Grafo_ListaAdyacencia::~Grafo_ListaAdyacencia()
+ListaAdyacencia::~ListaAdyacencia()
 {
     //dtor
 }
 
-Grafo_ListaAdyacencia::Grafo_ListaAdyacencia(const Grafo_ListaAdyacencia& orig)
+ListaAdyacencia::ListaAdyacencia(const ListaAdyacencia& orig)
 {
 
 }
 
-void Grafo_ListaAdyacencia::Crear()
+void ListaAdyacencia::Crear()
 {
     cabeza = new Vertice();
     numVertices = 0;
 }
 
-void Grafo_ListaAdyacencia::EliminarTodasAristas(adyacente ad){
+void ListaAdyacencia::EliminarTodasAristas(adyacente ad){
     if(ad != 0){
         while(ad->sig != 0){
             EliminarTodasAristas(ad->sig);
@@ -32,7 +32,7 @@ void Grafo_ListaAdyacencia::EliminarTodasAristas(adyacente ad){
     }
 }
 
-void Grafo_ListaAdyacencia::EliminarTodosVertices(vertice v){
+void ListaAdyacencia::EliminarTodosVertices(vertice v){
     if(v != 0){
         while(v->siguiente != 0){
             EliminarTodosVertices(v->siguiente);
@@ -41,7 +41,7 @@ void Grafo_ListaAdyacencia::EliminarTodosVertices(vertice v){
     }
 }
 
-void Grafo_ListaAdyacencia::Destruir()
+void ListaAdyacencia::Destruir()
 {
     vertice v = cabeza->siguiente;
     while(v!=0){
@@ -53,7 +53,7 @@ void Grafo_ListaAdyacencia::Destruir()
 
 }
 
-void Grafo_ListaAdyacencia::Vaciar()
+void ListaAdyacencia::Vaciar()
 {
     vertice v = cabeza->siguiente;
     while(v!=0){
@@ -64,12 +64,12 @@ void Grafo_ListaAdyacencia::Vaciar()
     EliminarTodosVertices(v);
 }
 
-bool Grafo_ListaAdyacencia::Vacio()
+bool ListaAdyacencia::Vacio()
 {
     return numVertices == 0 ? true : false;
 }
 
-void Grafo_ListaAdyacencia::AgregarVertice(string e)
+void ListaAdyacencia::AgregarVertice(string e)
 {
     vertice n = new Vertice(e);
     if(cabeza->siguiente == 0){
@@ -85,7 +85,7 @@ void Grafo_ListaAdyacencia::AgregarVertice(string e)
     numVertices++;
 }
 
-void Grafo_ListaAdyacencia::EliminarVertice(vertice v)
+void ListaAdyacencia::EliminarVertice(vertice v)
 {
     if(v == cabeza->siguiente){
         cabeza->siguiente = v->siguiente;
@@ -102,16 +102,16 @@ void Grafo_ListaAdyacencia::EliminarVertice(vertice v)
     --numVertices;
 }
 
-void Grafo_ListaAdyacencia::ModificarEtiqueta(string e, vertice v)
+void ListaAdyacencia::ModificarEtiqueta(string e, vertice v)
 {
     v->etiqueta = e;
 }
 
-string Grafo_ListaAdyacencia::Etiqueta(vertice v) {
+string ListaAdyacencia::Etiqueta(vertice v) {
     return v->etiqueta;
 }
 
-void Grafo_ListaAdyacencia::AgregarArista(vertice v1, vertice v2, int p) {
+void ListaAdyacencia::AgregarArista(vertice v1, vertice v2, int p) {
     adyacente adn = new Adyacente(v2->etiqueta, p);
     if (v1->ady->peso == -1) {
         v1->ady = adn;
@@ -125,7 +125,7 @@ void Grafo_ListaAdyacencia::AgregarArista(vertice v1, vertice v2, int p) {
     v1->n_verticesadyacentes++;
 }
 
-void Grafo_ListaAdyacencia::EliminarArista(vertice v1, vertice v2) {
+void ListaAdyacencia::EliminarArista(vertice v1, vertice v2) {
     adyacente artemp = v1->ady;
     if (artemp->etqVertice == v2->etiqueta) {
         if (artemp->sig != 0) {
@@ -151,7 +151,7 @@ void Grafo_ListaAdyacencia::EliminarArista(vertice v1, vertice v2) {
     v1->n_verticesadyacentes--;
 }
 
-void Grafo_ListaAdyacencia::ModificarPeso(vertice v1, vertice v2, int p)
+void ListaAdyacencia::ModificarPeso(vertice v1, vertice v2, int p)
 {
     adyacente artemp = v1->ady;
     while(artemp != 0 && artemp->etqVertice != v2->etiqueta){
@@ -160,7 +160,7 @@ void Grafo_ListaAdyacencia::ModificarPeso(vertice v1, vertice v2, int p)
     artemp->peso = p;
 }
 
-int Grafo_ListaAdyacencia::Peso(vertice v1, vertice v2)
+int ListaAdyacencia::Peso(vertice v1, vertice v2)
 {
     adyacente artemp = v1->ady;
     while(artemp != 0 && artemp->etqVertice != v2->etiqueta){
@@ -169,7 +169,7 @@ int Grafo_ListaAdyacencia::Peso(vertice v1, vertice v2)
     return artemp->peso;
 }
 
-bool Grafo_ListaAdyacencia::Adyacentes(vertice v1, vertice v2)
+bool ListaAdyacencia::Adyacentes(vertice v1, vertice v2)
 {
     adyacente artemp = 0;
     if(v1->ady != 0){
@@ -181,17 +181,17 @@ bool Grafo_ListaAdyacencia::Adyacentes(vertice v1, vertice v2)
     return artemp ? true : false;
 }
 
-vertice Grafo_ListaAdyacencia::PrimerVertice()
+vertice ListaAdyacencia::PrimerVertice()
 {
     return cabeza->siguiente;
 }
 
-vertice Grafo_ListaAdyacencia::SiguienteVertice(vertice v)
+vertice ListaAdyacencia::SiguienteVertice(vertice v)
 {
     return v->siguiente;
 }
 
-vertice Grafo_ListaAdyacencia::PrimerVerticeAdyacente(vertice v)
+vertice ListaAdyacencia::PrimerVerticeAdyacente(vertice v)
 {
     vertice vrtemp = cabeza->siguiente;
     while(vrtemp != 0 && vrtemp->etiqueta != v->ady->etqVertice){
@@ -200,7 +200,7 @@ vertice Grafo_ListaAdyacencia::PrimerVerticeAdyacente(vertice v)
     return vrtemp;
 }
 
-vertice Grafo_ListaAdyacencia::SiguienteVerticeAdyacente(vertice v1, vertice v2)
+vertice ListaAdyacencia::SiguienteVerticeAdyacente(vertice v1, vertice v2)
 {
     adyacente artemp = v1->ady;
     while(artemp != 0 && artemp->etqVertice != v2->etiqueta){
@@ -217,17 +217,17 @@ vertice Grafo_ListaAdyacencia::SiguienteVerticeAdyacente(vertice v1, vertice v2)
     return vrtemp;
 }
 
-int Grafo_ListaAdyacencia::NumVertices()
+int ListaAdyacencia::NumVertices()
 {
     return numVertices;
 }
 
-int Grafo_ListaAdyacencia::NumVerticesAdyacentes(vertice v)
+int ListaAdyacencia::NumVerticesAdyacentes(vertice v)
 {
     return v->n_verticesadyacentes;
 }
 
-void Grafo_ListaAdyacencia::Listar(){
+void ListaAdyacencia::Listar(){
     vertice vrtemp = cabeza->siguiente;
     while(vrtemp != 0){
         std::cout << vrtemp->etiqueta  << ": ";
@@ -242,7 +242,7 @@ void Grafo_ListaAdyacencia::Listar(){
     cout << endl;
 }
 
-vertice Grafo_ListaAdyacencia::ConvierteVertice(string e){
+vertice ListaAdyacencia::ConvierteVertice(string e){
     vertice tmp = cabeza->siguiente;
     while(tmp != 0 && tmp->etiqueta != e){
         tmp = tmp->siguiente;

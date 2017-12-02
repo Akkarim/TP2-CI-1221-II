@@ -46,11 +46,11 @@ struct Vertice {
 typedef Vertice* vertice;
 typedef Adyacente* adyacente;
 
-class Grafo_ListaAdyacencia {
+class ListaAdyacencia {
 public:
-    Grafo_ListaAdyacencia();
-    Grafo_ListaAdyacencia(const Grafo_ListaAdyacencia& orig);
-    virtual ~Grafo_ListaAdyacencia();
+    ListaAdyacencia();
+    ListaAdyacencia(const ListaAdyacencia& orig);
+    virtual ~ListaAdyacencia();
 
     //EFE: Crea un grafo vacio.
     //REQ: Grafo sin inicializar.

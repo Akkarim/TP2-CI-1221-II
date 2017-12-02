@@ -38,13 +38,13 @@ public:
     //REQ: conjunto de conjuntos inicializado. ambos conjuntos existan.
     //MOD: conjunto de conjuntos.
     void unirConjuntos(string idConj1, string idConj2);
+    
 private:
     
     template <typename C>
     struct Conjunto {
         C elemento;
         Conjunto *sigElem;
-
         Conjunto(C e) {
             elemento = e;
             sigElem = nullptr;

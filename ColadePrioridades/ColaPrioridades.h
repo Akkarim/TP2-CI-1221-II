@@ -108,7 +108,7 @@ void ColaPrioridades<A>::agregar(A elemento, int prioridad) {
 template <typename A>
 A ColaPrioridades<A>::sacar() {
     A auxiliar = arreglo[1].elemento;
-    cout<<arreglo[1].elemento<<"\n";
+    //cout<<arreglo[1].elemento<<"\n";
     Caja<A> padre;
     bool terminado = false;
     int iterador = 1;

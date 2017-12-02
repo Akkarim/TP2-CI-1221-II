@@ -7,10 +7,15 @@
 //#include "Grafo/MatrizAdyacencia.h"
 #include "Grafo/ListaAdyacencia.h"
 #include "Diccionario/Diccionario.h"
+#include "ColadePrioridades/ColaPrioridades.h"
+#include "ConjuntodeConjuntos/CnjCnjs.h"
 
 //typedef MatrizAdyacencia grafos;
-typedef Grafo_ListaAdyacencia* grafos;
+typedef ListaAdyacencia* grafos;
 typedef Diccionario<vertice> diccionarios;
+typedef ColaPrioridades<pair<vertice, vertice>> colaPrioridades;
+typedef Diccionario<pair <vertice, vertice>> diccionarioAristasVisitadas; // Diccionario de Aristas visitadas
+typedef CnjCnjs<vertice> conjuntodConjs;
 
 using namespace std;
 
