@@ -35,7 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/Diccionario/Diccionario.o \
+	${OBJECTDIR}/Algoritmos.o \
 	${OBJECTDIR}/Grafo/ListaAdyacencia.o \
 	${OBJECTDIR}/Grafo/MatrizAdyacencia.o \
 	${OBJECTDIR}/main.o
@@ -65,10 +65,10 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/tp2-ci-1221-ii.exe: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/tp2-ci-1221-ii ${OBJECTFILES} ${LDLIBSOPTIONS}
 
-${OBJECTDIR}/Diccionario/Diccionario.o: Diccionario/Diccionario.cpp
-	${MKDIR} -p ${OBJECTDIR}/Diccionario
+${OBJECTDIR}/Algoritmos.o: Algoritmos.cpp
+	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Diccionario/Diccionario.o Diccionario/Diccionario.cpp
+	$(COMPILE.cc) -O2 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Algoritmos.o Algoritmos.cpp
 
 ${OBJECTDIR}/Grafo/ListaAdyacencia.o: Grafo/ListaAdyacencia.cpp
 	${MKDIR} -p ${OBJECTDIR}/Grafo

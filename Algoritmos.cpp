@@ -1,6 +1,7 @@
 #include "Algoritmos.h"
 
 AlgoritmosGrafos::AlgoritmosGrafos() {
+    
 }
 
 AlgoritmosGrafos::AlgoritmosGrafos(const AlgoritmosGrafos& orig) {
@@ -280,4 +281,70 @@ void AlgoritmosGrafos::Copiar(grafos o, grafos c) {
         vc = c->SiguienteVertice(vc);
     }
 }
+
+void AlgoritmosGrafos::Vendedor(const grafos& g) {
+    int n = g->NumVertices();
+    //mejorRuta = new vertice[n];
+    vertice* ruta = new vertice[n];
+    dvv.Crear();
+    int solAct = 9999;
+    numSolFacts = 0;
+    dvv.Agregar(g->PrimerVertice());
+    vertice* rutaAct = VendedorRec(g, g->PrimerVertice(), 0, solAct, ruta);
+    delete[] ruta;
+    if(rutaAct != 0){
+        cout << g->Etiqueta(g->PrimerVertice()) << ",";
+        for(int i=0; i < n; i++){
+            cout << g->Etiqueta(rutaAct[i]) << ",";
+        }
+        cout << endl;
+        cout << "Peso: " << solAct << endl;
+        cout << "Numero de soluciones factibles: " << numSolFacts << endl;
+    } else{
+        cout << "No hay soluciones" << endl;
+    }
+}
+
+vertice* AlgoritmosGrafos::VendedorRec(const grafos& g, vertice vrt, int peso, int solAct, vertice* ruta) {
+    vertice* solucion = 0;
+    if(dvv.NumElem() == g->NumVertices()){
+        if(!g->Adyacentes(vrt, g->PrimerVertice())){
+            return 0;
+        }
+        peso += g->Peso(vrt, g->PrimerVertice());
+        numSolFacts++;
+        if(peso < solAct){
+            const int n = g->NumVertices();   
+            solucion = new vertice[n];
+            solAct = peso;
+            for(int i =0; i < n-1; i++){
+                solucion[i] = ruta[i];
+            }
+            solucion[n-1] = g->PrimerVertice();
+        }
+        return solucion;
+    }
+    vertice ady = g->PrimerVerticeAdyacente(vrt);
+    while(ady != 0){
+        if(!dvv.Pertenece(ady)){
+            dvv.Agregar(ady);
+            peso += g->Peso(vrt, ady);
+            ruta[dvv.NumElem()-2] = ady;
+            vertice* solP = VendedorRec(g, ady, peso, solAct, ruta);
+            if(solP != 0){
+                if(solucion != 0){
+                    delete[] solucion;
+                }
+                solucion = solP;
+            }
+            dvv.Eliminar(ady);
+            peso -= g->Peso(vrt, ady);
+            numSolFacts--;
+        }
+        ady = g->SiguienteVerticeAdyacente(vrt, ady);
+    } 
+    return solucion;
+}
+
+
 

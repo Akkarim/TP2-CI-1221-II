@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 //#include "Grafo/MatrizAdyacencia.h"
 #include "Grafo/ListaAdyacencia.h"
@@ -11,6 +12,7 @@
 //typedef MatrizAdyacencia grafos;
 typedef Grafo_ListaAdyacencia* grafos;
 typedef Diccionario<vertice> diccionarios;
+typedef Diccionario<vertice> Dvv;
 
 using namespace std;
 
@@ -50,11 +52,18 @@ public:
     //MOD: ---
     bool Iguales(grafos, grafos);
 
-    //EFE: 
+    //EFE: Devuelve el número de soluciones factibles y la solución óptima
     //REQ: G inicializado con más de 2 vértices
     //MOD: ---
-    void Vendedor(grafos); // falta
-
+    void Vendedor(const grafos& g); // falta
+    
+    
+private:
+    vertice* VendedorRec(const grafos& g, vertice vrt, int peso, int solAc, vertice* v);
+    int solOptima;
+    vertice* mejorRuta;
+    int numSolFacts;
+    Dvv dvv;
 };
 
 #endif /* ALGORITMOS_H */
