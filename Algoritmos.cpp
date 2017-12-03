@@ -1,6 +1,7 @@
 #include "Algoritmos.h"
 
 AlgoritmosGrafos::AlgoritmosGrafos() {
+
 }
 
 AlgoritmosGrafos::AlgoritmosGrafos(const AlgoritmosGrafos& orig) {
@@ -326,4 +327,117 @@ void AlgoritmosGrafos::Copiar(grafos o, grafos c) {
         vc = c->SiguienteVertice(vc);
     }
 }
+
+void AlgoritmosGrafos::Vendedor(const grafos& g) {
+    int n = g->NumVertices();
+    vertice* ruta = new vertice[n];
+    dvv.Crear();
+    numSolFacts = 0;
+    solOptima = 9999;
+    dvv.Agregar(g->PrimerVertice());
+    vertice* rutaAct = VendedorRec(g, g->PrimerVertice(), 0, ruta);
+    delete[] ruta;
+    if (rutaAct != 0) {
+        cout << g->Etiqueta(g->PrimerVertice()) << "->";
+        for (int i = 0; i < n - 1; i++) {
+            cout << g->Etiqueta(rutaAct[i]) << "->";
+        }
+        cout << g->Etiqueta(g->PrimerVertice()) << endl;
+        cout << "Peso Total: " << solOptima << endl;
+        cout << "Numero de soluciones factibles: " << numSolFacts << endl;
+    } else {
+        cout << "No hay soluciones" << endl;
+    }
+    dvv.Destruir();
+}
+
+vertice* AlgoritmosGrafos::VendedorRec(const grafos& g, vertice vrt, int peso, vertice* ruta) {
+    vertice* solucion = 0;
+    if (dvv.NumElem() == g->NumVertices()) {
+        if (!g->Adyacentes(vrt, g->PrimerVertice())) {
+            return 0;
+        }
+        peso += g->Peso(vrt, g->PrimerVertice());
+        numSolFacts++;
+        if (peso < solOptima) {
+            const int n = g->NumVertices();
+            solucion = new vertice[n];
+            solOptima = peso;
+            for (int i = 0; i < n - 1; i++) {
+                solucion[i] = ruta[i];
+            }
+            solucion[n - 1] = g->PrimerVertice();
+        }
+        return solucion;
+    }
+    vertice ady = g->PrimerVerticeAdyacente(vrt);
+    while (ady != 0) {
+        if (!dvv.Pertenece(ady)) {
+            dvv.Agregar(ady);
+            peso += g->Peso(vrt, ady);
+            ruta[dvv.NumElem() - 2] = ady;
+            vertice* solP = VendedorRec(g, ady, peso, ruta);
+            if (solP != 0) {
+                if (solucion != 0) {
+                    delete[] solucion;
+                }
+                solucion = solP;
+            }
+            dvv.Eliminar(ady);
+            peso -= g->Peso(vrt, ady);
+        }
+        ady = g->SiguienteVerticeAdyacente(vrt, ady);
+    }
+    return solucion;
+}
+
+void AlgoritmosGrafos::Prim(const grafos& g) {
+    dvv.Crear();
+    dvv.Vaciar();
+    int n = g->NumVertices();
+    string ruta[n]; //para guardar el árbol 
+    int keys[n];
+
+    for (int i = 0; i < n; i++) {
+        keys[i] = 99999;
+    }
+    for (int i = 0; i < n; i++) {
+        vertice piv = Pivote(g);
+        dvv.Agregar(piv);
+        ruta[i] = g->Etiqueta(piv);
+        vertice vA = g->PrimerVerticeAdyacente(piv);
+        while (vA != NULL) {
+            if ((g->Peso(piv, vA) < keys[i])) {
+                ruta[i] = g->Etiqueta(piv);
+                keys[i] = g->Peso(piv, vA);
+            }
+            vA = g->SiguienteVerticeAdyacente(piv, vA);
+        }
+    }
+
+    cout << "ARISTA    PESO" << endl;
+    for (int i = 0; i < n-1; i++) {
+        cout << ruta[i] <<  "-" << ruta[i+1] << "        " << keys[i] << endl;
+    }
+}
+
+vertice AlgoritmosGrafos::Pivote(const grafos& g) {
+    vertice pivote = g->PrimerVertice();
+    vertice v = g->PrimerVertice();
+    while (v != NULL) {
+        if (dvv.Pertenece(pivote)) {
+            pivote = g->SiguienteVertice(pivote);
+        } else {
+            if (pivote->etiqueta.compare(v->etiqueta) > 0 && !dvv.Pertenece(v)) {
+                pivote = v;
+                dvv.Agregar(v);
+            }
+            v = g->SiguienteVertice(v);
+        }
+    }
+    return pivote;
+}
+
+
+
 

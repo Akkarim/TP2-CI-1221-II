@@ -145,13 +145,28 @@ void Diccionario<T>::Agregar(T e){
 
 template <typename T>
 void Diccionario<T>::Eliminar(T e){
-     Nodo<T> *temp = primero;
-    while(temp->sgt->elemento != e && temp != NULL){
-        temp = temp->sgt;
+    //Nodo<T> *temp = primero;
+    Nodo<T> *aux;
+    Nodo<T> *anterior = NULL;
+    aux = primero;
+    while(aux != NULL && aux->elemento != e){
+        anterior = aux;
+        aux = aux->sgt;
+    }    
+    if(anterior == NULL){ //si es el primer elemento
+        primero = primero->sgt;
+        delete aux;
+    } else{
+        anterior->sgt = aux->sgt;
+        delete aux;
     }
-    if(temp->sgt->elemento == e){
-        temp->sgt = temp->sgt->sgt;
-    }
+    
+//    while(temp->elemento != e && temp != NULL){
+//        temp = temp->sgt;
+//    }
+//    if(temp->elemento == e){
+//        temp->sgt = temp->sgt->sgt;
+//    }
     ultimoLleno--;
 }
 

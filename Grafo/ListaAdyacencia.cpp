@@ -123,6 +123,18 @@ void ListaAdyacencia::AgregarArista(vertice v1, vertice v2, int p) {
         ad_t->sig = adn;
     }
     v1->n_verticesadyacentes++;
+//----------------------------------------------------------------------------------------
+    adyacente ady = new Adyacente(v1->etiqueta, p);
+    if (v2->ady->peso == -1) {
+        v2->ady = ady;
+    } else {
+        adyacente ad_t = v2->ady;
+        while (ad_t->sig != 0) {
+            ad_t = ad_t->sig;
+        }
+        ad_t->sig = ady;
+    }
+    v2->n_verticesadyacentes++;
 }
 
 void ListaAdyacencia::EliminarArista(vertice v1, vertice v2) {
@@ -149,6 +161,30 @@ void ListaAdyacencia::EliminarArista(vertice v1, vertice v2) {
         }
     }
     v1->n_verticesadyacentes--;
+//------------------------------------------------------------------------------
+    adyacente temp = v2->ady;
+    if (temp->etqVertice == v1->etiqueta) {
+        if (artemp->sig != 0) {
+            v2->ady = temp->sig;
+            delete(temp);
+        } else {
+            delete(temp);
+            v2->ady = 0;
+        }
+    } else {
+        while (temp != 0 && temp->sig->etqVertice != v1->etiqueta) {
+            temp = temp->sig;
+        }
+        if (temp->sig->sig == 0) {
+            delete(temp->sig);
+            temp->sig = 0;
+        } else {
+            temp->sig = temp->sig->sig;
+            /* FALTA EL DELETE */
+//            delete(artemp);
+        }
+    }
+    v2->n_verticesadyacentes--;
 }
 
 void ListaAdyacencia::ModificarPeso(vertice v1, vertice v2, int p)

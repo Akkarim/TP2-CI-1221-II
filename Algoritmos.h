@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 //#include "Grafo/MatrizAdyacencia.h"
 #include "Grafo/ListaAdyacencia.h"
@@ -13,9 +14,11 @@
 //typedef MatrizAdyacencia grafos;
 typedef ListaAdyacencia* grafos;
 typedef Diccionario<vertice> diccionarios;
+
 typedef ColaPrioridades<pair<vertice, vertice>> colaPrioridades;
 typedef Diccionario<pair <vertice, vertice>> diccionarioAristasVisitadas; // Diccionario de Aristas visitadas
 typedef CnjCnjs<vertice> conjuntodConjs;
+typedef Diccionario<vertice> Dvv;
 
 using namespace std;
 
@@ -38,7 +41,7 @@ public:
     //EFE: Busca el árbol de mínimo costo de un grafo G, se basa en los vértices
     //REQ: G inicializado con más de 2 vértices
     //MOD: ---
-    void Prim(grafos); // falta
+    void Prim(const grafos& g);
 
     //EFE: Busca el árbol de mínimo costo de un grafo G, se basa en las aristas
     //REQ: G inicializado con más de 2 vértices
@@ -55,11 +58,20 @@ public:
     //MOD: ---
     bool Iguales(grafos, grafos);
 
-    //EFE: 
+    //EFE: Devuelve el número de soluciones factibles y la solución óptima
     //REQ: G inicializado con más de 2 vértices
     //MOD: ---
-    void Vendedor(grafos); // falta
+    void Vendedor(const grafos& g);
 
+    
+private:
+    vertice* VendedorRec(const grafos& g, vertice vrt, int peso, vertice* v);
+    int solOptima;
+    vertice* mejorRuta;
+    int numSolFacts;
+    Dvv dvv;
+    
+    vertice Pivote(const grafos& g);
 };
 
 #endif /* ALGORITMOS_H */

@@ -4,6 +4,7 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>Algoritmos.h</itemPath>
       <itemPath>ConjuntodeConjuntos/CnjCnjs.h</itemPath>
       <itemPath>ColadePrioridades/ColaPrioridades.h</itemPath>
       <itemPath>Diccionario/Diccionario.h</itemPath>
@@ -17,7 +18,7 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>Diccionario/Diccionario.cpp</itemPath>
+      <itemPath>Algoritmos.cpp</itemPath>
       <itemPath>Grafo/ListaAdyacencia.cpp</itemPath>
       <itemPath>Grafo/MatrizAdyacencia.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
@@ -47,14 +48,16 @@
           <standard>8</standard>
         </ccTool>
       </compileType>
+      <item path="Algoritmos.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Algoritmos.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="ColadePrioridades/ColaPrioridades.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
       <item path="ConjuntodeConjuntos/CnjCnjs.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Diccionario/Diccionario.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Diccionario/Diccionario.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -90,14 +93,16 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="Algoritmos.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Algoritmos.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="ColadePrioridades/ColaPrioridades.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
       <item path="ConjuntodeConjuntos/CnjCnjs.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Diccionario/Diccionario.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Diccionario/Diccionario.h" ex="false" tool="3" flavor2="0">
       </item>
