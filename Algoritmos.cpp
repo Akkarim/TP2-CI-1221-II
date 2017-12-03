@@ -369,8 +369,8 @@ void AlgoritmosGrafos::Prim(const grafos& g) {
     }
 
     cout << "ARISTA    PESO" << endl;
-    for (int i = 0; i < n - 1; i++) {
-        cout << ruta[i] << "-" << ruta[i + 1] << "        " << keys[i] << endl;
+    for (int i = 0; i < n-1; i++) {
+        cout << ruta[i] <<  "-" << ruta[i+1] << "        " << keys[i] << endl;
     }
 }
 
