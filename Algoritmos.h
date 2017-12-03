@@ -35,7 +35,7 @@ public:
     //EFE: Busca el árbol de mínimo costo de un grafo G, se basa en los vértices
     //REQ: G inicializado con más de 2 vértices
     //MOD: ---
-    void Prim(grafos); // falta
+    void Prim(const grafos& g);
 
     //EFE: Busca el árbol de mínimo costo de un grafo G, se basa en las aristas
     //REQ: G inicializado con más de 2 vértices
@@ -55,8 +55,8 @@ public:
     //EFE: Devuelve el número de soluciones factibles y la solución óptima
     //REQ: G inicializado con más de 2 vértices
     //MOD: ---
-    void Vendedor(const grafos& g); // falta
-    
+    void Vendedor(const grafos& g);
+
     
 private:
     vertice* VendedorRec(const grafos& g, vertice vrt, int peso, vertice* v);
@@ -64,6 +64,8 @@ private:
     vertice* mejorRuta;
     int numSolFacts;
     Dvv dvv;
+    
+    vertice Pivote(const grafos& g);
 };
 
 #endif /* ALGORITMOS_H */
